@@ -1,0 +1,10 @@
+[package]
+name = "glommio-server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+config = {path="../config"}
+
+glommio = "0.6"
+futures-lite = "1.12"

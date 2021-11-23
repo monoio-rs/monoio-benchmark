@@ -1,0 +1,11 @@
+[workspace]
+
+members = [
+    "monoio-server",
+    "tokio-server",
+    "glommio-server",
+
+    "client",
+
+    "config"
+]

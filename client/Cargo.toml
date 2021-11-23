@@ -1,0 +1,10 @@
+[package]
+name = "client"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+config = {path="../config"}
+
+monoio = {path="../../monoio/monoio"}
+local-sync = "0.0.2"
