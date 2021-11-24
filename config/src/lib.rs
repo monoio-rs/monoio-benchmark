@@ -1,8 +1,8 @@
 use clap::Parser;
 
 // in Byte
-pub const PACKET_SIZE: usize = 10;
-// 100ms
+pub const PACKET_SIZE: usize = 1024;
+// 1s/10 = 100ms
 pub const COUNT_GRAIN_PRE_SEC: u32 = 10;
 
 #[derive(Parser, Debug, Clone, PartialEq)]
