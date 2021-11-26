@@ -13,3 +13,20 @@ TODO: 1C/4C with 3 runtimes, different connections, watch the throughput.
 We can measure the latency and CPU utilization of different runtimes.
 
 TODO: 1C/4C with 3 runtimes, different QPS, watch latency and CPU utilization.
+
+## How to run
+Run diffrent servers:
+```
+./target/release/monoio-server --cores 1
+./target/release/glommio-server --cores 1
+taskset -c 1 ./target/release/tokio-server --cores 1
+
+./target/release/monoio-server --cores 1 2 3 4
+./target/release/glommio-server --cores 1 2 3 4
+taskset -c 1-4 ./target/release/tokio-server --cores 1 2 3 4
+```
+
+Run client:
+```
+./target/release/client --target 10.0.0.0:40000 --cores 1 2 3 4 --conns-per-core 150
+```

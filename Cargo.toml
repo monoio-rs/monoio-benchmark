@@ -9,3 +9,8 @@ members = [
 
     "config"
 ]
+
+[profile.release]
+lto = true
+debug = false
+overflow-checks = false

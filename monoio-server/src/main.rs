@@ -19,7 +19,7 @@ fn main() {
         let h = std::thread::spawn(move || {
             monoio::utils::bind_to_cpu_set(Some(cpu_)).unwrap();
             let mut rt = RuntimeBuilder::new()
-                .with_entries(2560)
+                .with_entries(32768)
                 .build()
                 .unwrap();
             rt.block_on(serve(cfg_));

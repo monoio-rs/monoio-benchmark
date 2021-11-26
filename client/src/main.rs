@@ -48,6 +48,7 @@ CPU slot: {}",
             monoio::utils::bind_to_cpu_set(Some(cpu_)).unwrap();
             let mut rt = RuntimeBuilder::new().with_entries(2560).enable_timer().build().unwrap();
             rt.block_on(run_thread(count_, eps_, cfg_));
+            println!("Thread {} finished", cpu_);
         });
     }
 
@@ -122,11 +123,13 @@ async fn run_conn(
         let (w, buf_w) = stream.write_all(buf).await;
         if w.is_err() {
             // The connection is closed.
+            println!("Write failed, connection exit");
             return;
         }
         let (r, buf_r) = stream.read_exact(buf_w).await;
         if r.is_err() {
             // The connection is closed.
+            println!("Read failed, connection exit");
             return;
         }
         let eps_ = begin.elapsed().as_micros() as u64;
