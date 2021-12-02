@@ -7,4 +7,4 @@ edition = "2021"
 config = {path="../config"}
 
 monoio = {path="../../monoio/monoio"}
-local-sync = "0.0.3"
+local-sync = "0.0.5"

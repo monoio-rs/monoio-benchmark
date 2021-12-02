@@ -486,9 +486,9 @@ checksum = "8521a1b57e76b1ec69af7599e75e38e7b7fad6610f037db8c79b127201b5d119"
 
 [[package]]
 name = "local-sync"
-version = "0.0.3"
+version = "0.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7778727d272f9d6cef27b1e84f46166583f7ffa7c84356bb3a43b1d65bab430a"
+checksum = "56ae84de7298d25e454f7c95077e85e04585445626f9b2606b1634f125667eff"
 dependencies = [
  "futures-core",
  "futures-sink",
@@ -582,7 +582,7 @@ dependencies = [
 
 [[package]]
 name = "monoio"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "bytes",
  "futures",

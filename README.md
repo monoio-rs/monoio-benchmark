@@ -7,12 +7,8 @@ We will use 1K ping-pong to test performance of different runtimes. Server will 
 ## Max throughput
 With given connections(enough for fully utilize CPU cores which latency is not important), we can measure the maximum throughput.
 
-TODO: 1C/4C with 3 runtimes, different connections, watch the throughput.
-
 ## Fixed QPS
 We can measure the latency and CPU utilization of different runtimes.
-
-TODO: 1C/4C with 3 runtimes, different QPS, watch latency and CPU utilization.
 
 ## How to run
 Run diffrent servers:
@@ -30,3 +26,6 @@ Run client:
 ```
 ./target/release/client --target 10.0.0.0:40000 --cores 1 2 3 4 --conns-per-core 150
 ```
+
+## Benchmark result
+Full result is available in [中文版本](https://github.com/bytedance/monoio/blob/master/docs/zh/benchmark.md) / [English version](https://github.com/bytedance/monoio/blob/master/docs/zh/benchmark.md).
