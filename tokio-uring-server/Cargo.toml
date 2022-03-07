@@ -1,10 +1,9 @@
 [package]
-name = "client"
+name = "tokio-uring-server"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 config = {path="../config"}
 
-monoio = {git="https://github.com/bytedance/monoio"}
-local-sync = "0.0.5"
+tokio-uring = {version = "0.3"}

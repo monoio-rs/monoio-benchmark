@@ -6,4 +6,4 @@ edition = "2021"
 [dependencies]
 config = {path="../config"}
 
-monoio = {path="../../monoio/monoio"}
+monoio = {git="https://github.com/bytedance/monoio"}
