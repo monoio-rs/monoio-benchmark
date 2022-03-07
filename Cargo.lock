@@ -582,7 +582,8 @@ dependencies = [
 
 [[package]]
 name = "monoio"
-version = "0.0.3"
+version = "0.0.4"
+source = "git+https://github.com/bytedance/monoio#a3eaf61ba0b0cf5b44fc5e420ea816cda19df736"
 dependencies = [
  "bytes",
  "futures",
@@ -593,7 +594,6 @@ dependencies = [
  "nix 0.23.0",
  "os_socketaddr",
  "pin-project-lite",
- "pin-utils",
  "scoped-tls",
  "socket2 0.4.2",
 ]
@@ -601,6 +601,7 @@ dependencies = [
 [[package]]
 name = "monoio-macros"
 version = "0.0.2"
+source = "git+https://github.com/bytedance/monoio#a3eaf61ba0b0cf5b44fc5e420ea816cda19df736"
 dependencies = [
  "proc-macro2",
  "quote",
