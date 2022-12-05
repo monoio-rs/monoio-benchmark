@@ -10,6 +10,9 @@ members = [
     "config"
 ]
 
+[workspace.dependencies]
+monoio = { version = "0.0" }
+
 [profile.release]
 lto = true
 debug = false
