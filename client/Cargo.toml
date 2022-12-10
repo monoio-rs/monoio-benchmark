@@ -6,5 +6,5 @@ edition = "2021"
 [dependencies]
 config = {path="../config"}
 
-monoio = {path="../../monoio/monoio"}
+monoio = { workspace = true }
 local-sync = "0.0.5"

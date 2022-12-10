@@ -46,7 +46,7 @@ CPU slot: {}",
         let eps_ = eps.clone();
         std::thread::spawn(move || {
             monoio::utils::bind_to_cpu_set(Some(cpu_)).unwrap();
-            let mut rt = RuntimeBuilder::new().with_entries(2560).enable_timer().build().unwrap();
+            let mut rt = RuntimeBuilder::<monoio::IoUringDriver>::new().with_entries(2560).enable_timer().build().unwrap();
             rt.block_on(run_thread(count_, eps_, cfg_));
             println!("Thread {} finished", cpu_);
         });
@@ -112,7 +112,7 @@ async fn run_conn(
     target: String,
 ) {
     let mut buf = vec![0; PACKET_SIZE];
-    let stream = TcpStream::connect(target).await.unwrap();
+    let mut stream = TcpStream::connect(target).await.unwrap();
 
     loop {
         if let Some(s) = qps_per_conn.as_ref() {
