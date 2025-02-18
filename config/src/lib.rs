@@ -13,6 +13,8 @@ pub struct ServerConfig {
         long,
         required = true,
         default_value = "1",
+        value_delimiter = ' ',
+        num_args = 1..,
         help = "cpu core id list"
     )]
     pub cores: Vec<u8>,
@@ -32,6 +34,8 @@ pub struct ClientConfig {
         short,
         long,
         required = true,
+        value_delimiter = ' ',
+        num_args = 1..,
         default_value = "0",
         help = "cpu core id list"
     )]
