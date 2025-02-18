@@ -1,10 +1,8 @@
 [package]
-name = "client"
+name = "tokio-uring-server"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 config = { path = "../config" }
-
-monoio = { workspace = true }
-local-sync = "0.1.1"
+tokio-uring = "0.5.0"

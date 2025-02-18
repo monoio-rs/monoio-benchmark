@@ -1,8 +1,8 @@
 use std::sync::Arc;
 
 use config::{ServerConfig, PACKET_SIZE};
-use futures_lite::{StreamExt, AsyncReadExt, AsyncWriteExt};
-use glommio::{LocalExecutorBuilder, net::TcpListener, Task};
+use futures_lite::{AsyncReadExt, AsyncWriteExt, StreamExt};
+use glommio::{net::TcpListener, LocalExecutorBuilder, Placement};
 
 fn main() {
     let cfg = Arc::new(ServerConfig::parse());
@@ -18,7 +18,9 @@ fn main() {
         let cfg_ = cfg.clone();
         let cpu_ = *cpu as _;
         let h = std::thread::spawn(move || {
-            let ex = LocalExecutorBuilder::new().pin_to_cpu(cpu_).make().unwrap();
+            let ex = LocalExecutorBuilder::new(Placement::Fixed(cpu_))
+                .make()
+                .unwrap();
 
             ex.run(serve(cfg_));
         });
@@ -34,7 +36,7 @@ async fn serve(cfg: Arc<ServerConfig>) {
     let mut incoming = listener.incoming();
     while let Some(stream) = incoming.next().await {
         let mut stream = stream.unwrap();
-        Task::local(async move {
+        glommio::spawn_local(async move {
             let mut buf = vec![0; PACKET_SIZE];
             loop {
                 match stream.read_exact(&mut buf).await {

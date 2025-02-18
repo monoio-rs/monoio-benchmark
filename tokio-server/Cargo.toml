@@ -4,6 +4,5 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-config = {path="../config"}
-
-tokio = {version = "1", features = ["full"]}
+config = { path = "../config" }
+tokio = { version = "1", features = ["full"] }

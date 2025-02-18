@@ -4,16 +4,16 @@ members = [
     "monoio-server",
     "tokio-server",
     "glommio-server",
-
     "client",
-
-    "config"
+    "config",
+    "tokio-uring-server",
 ]
 
 [workspace.dependencies]
-monoio = { version = "0.0" }
+monoio = { version = "0.2.4" }
 
 [profile.release]
-lto = true
-debug = false
-overflow-checks = false
+codegen-units = 1 # Allows LLVM to perform better optimization.
+lto = true        # Enables link-time-optimizations.
+panic = "abort"   # Higher performance by disabling panic handlers.
+strip = true      # Ensures debug symbols are removed.
