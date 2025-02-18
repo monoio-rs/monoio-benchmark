@@ -1,3 +1,23 @@
+# My Fork Changes
+
+- Added run_client.sh script to run the clients with multiple cores and connections and save the results to csv files.
+- Added [tokio-uring](https://github.com/tokio-rs/tokio-uring) server.
+- Updated dependencies to latest versions.
+
+To run the benchmark:
+
+```bash
+cargo build --release
+# Run a server
+./target/release/monoio-server --cores 1 2
+# Run the client script
+./run_client.sh
+```
+
+
+
+
+
 # Monoio Benchmark
 
 TCP ping-pong(not echo) is a common benchmark for network applications.
