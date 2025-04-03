@@ -1,5 +1,5 @@
 [workspace]
-resolver = "2"
+resolver = "3"
 
 members = [
     "monoio-server",
@@ -11,7 +11,16 @@ members = [
 ]
 
 [workspace.dependencies]
-monoio = { version = "0.2.4" }
+monoio = { version = "0.2" }
+tokio-uring = "0.5"
+tokio = { version = "1", features = [
+    "rt-multi-thread",
+    "io-util",
+] } # TODO: Remove full
+glommio = "0.9"
+futures-lite = "2.6"
+clap = { version = "4.5", features = ["derive"] }
+local-sync = "0.1"
 
 [profile.release]
 codegen-units = 1 # Allows LLVM to perform better optimization.
