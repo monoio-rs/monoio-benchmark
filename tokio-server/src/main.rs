@@ -1,6 +1,6 @@
 // Since we can hardly control every thread, we should use `taskset`.
 
-use config::{ServerConfig, PACKET_SIZE};
+use config::{PACKET_SIZE, ServerConfig};
 use tokio::{
     io::{AsyncReadExt, AsyncWriteExt},
     net::TcpListener,

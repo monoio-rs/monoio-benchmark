@@ -1,7 +1,11 @@
 use std::sync::Arc;
 
-use config::{ServerConfig, PACKET_SIZE};
-use monoio::{net::TcpListener, RuntimeBuilder, io::{AsyncReadRentExt, AsyncWriteRentExt}};
+use config::{PACKET_SIZE, ServerConfig};
+use monoio::{
+    RuntimeBuilder,
+    io::{AsyncReadRentExt, AsyncWriteRentExt},
+    net::TcpListener,
+};
 
 fn main() {
     let cfg = Arc::new(ServerConfig::parse());
@@ -12,7 +16,7 @@ fn main() {
         config::format_cores(&cfg.cores)
     );
 
-    let mut threads = Vec::new();
+    let mut threads = Vec::with_capacity(cfg.cores.len());
     for cpu in cfg.cores.iter() {
         let cfg_ = cfg.clone();
         let cpu_ = *cpu as _;
@@ -22,7 +26,7 @@ fn main() {
                 .with_entries(32768)
                 .build()
                 .unwrap();
-            rt.block_on(serve(cfg_));
+            rt.block_on(serve(&cfg_));
         });
         threads.push(h);
     }
@@ -31,8 +35,11 @@ fn main() {
     }
 }
 
-async fn serve(cfg: Arc<ServerConfig>) {
+async fn serve(cfg: &ServerConfig) {
+    // TODO: ver keybind para fechar dock da esquerda: CTRL-B que o vim ta a usar
+
     let listener = TcpListener::bind(&cfg.bind).unwrap();
+
     while let Ok((mut stream, _)) = listener.accept().await {
         monoio::spawn(async move {
             let mut buf = vec![0; PACKET_SIZE];

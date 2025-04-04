@@ -5,7 +5,8 @@ pub const PACKET_SIZE: usize = 1024;
 // 1s/10 = 100ms
 pub const COUNT_GRAIN_PRE_SEC: u32 = 10;
 
-#[derive(Parser, Debug, Clone, PartialEq)]
+#[derive(Parser)]
+#[cfg_attr(test, derive(Debug, PartialEq))]
 #[clap(version = "1.0", author = "ihciah <ihciah@gmail.com>")]
 pub struct ServerConfig {
     #[clap(
@@ -27,7 +28,8 @@ pub struct ServerConfig {
     pub bind: String,
 }
 
-#[derive(Parser, Debug, Clone, PartialEq)]
+#[derive(Parser)]
+#[cfg_attr(test, derive(Debug, PartialEq))]
 #[clap(version = "1.0", author = "ihciah <ihciah@gmail.com>")]
 pub struct ClientConfig {
     #[clap(
