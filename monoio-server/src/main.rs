@@ -36,8 +36,6 @@ fn main() {
 }
 
 async fn serve(cfg: &ServerConfig) {
-    // TODO: ver keybind para fechar dock da esquerda: CTRL-B que o vim ta a usar
-
     let listener = TcpListener::bind(&cfg.bind).unwrap();
 
     while let Ok((mut stream, _)) = listener.accept().await {
