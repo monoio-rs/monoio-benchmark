@@ -14,15 +14,11 @@ fn main() {
         "Running ping pong server with Tokio.\nPacket size: {}\nListen {}\nCPU count: {}",
         PACKET_SIZE, cfg.bind, cores
     );
-    let rt = if cores == 1 {
-        Builder::new_current_thread().enable_all().build().unwrap()
-    } else {
-        Builder::new_multi_thread()
-            .enable_all()
-            .worker_threads(cores)
-            .build()
-            .unwrap()
-    };
+    let rt = Builder::new_multi_thread()
+        .enable_all()
+        .worker_threads(cores)
+        .build()
+        .unwrap();
 
     rt.block_on(serve(&cfg, &rt))
 }
