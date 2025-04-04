@@ -3,6 +3,7 @@
 - Added run_client.sh script to run the clients with multiple cores and connections and save the results to csv files.
 - Added [tokio-uring](https://github.com/tokio-rs/tokio-uring) server.
 - Added [compio](https://github.com/compio-rs/compio) server.
+- Added [smol](https://github.com/smol-rs/smol) server.
 - Updated dependencies to latest versions.
 
 To run the benchmark:

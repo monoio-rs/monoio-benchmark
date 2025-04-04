@@ -9,6 +9,7 @@ members = [
     "config",
     "tokio-uring-server",
     "compio-server",
+    "smol-server",
 ]
 
 [workspace.dependencies]
@@ -22,6 +23,7 @@ local-sync = "0.1"
 compio = "0.14"
 nix = { version = "0.29", features = ["process", "sched"] }
 socket2 = { version = "0.5" }
+smol = "2.0"
 
 [profile.release]
 codegen-units = 1 # Allows LLVM to perform better optimization.
