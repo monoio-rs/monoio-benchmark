@@ -11,7 +11,7 @@ members = [
 ]
 
 [workspace.dependencies]
-monoio = { version = "0.0" }
+monoio = { git = "https://github.com/bytedance/monoio" }
 
 [profile.release]
 lto = true
