@@ -5,4 +5,6 @@ edition = "2024"
 
 [dependencies]
 config = { path = "../config" }
+socket2 = { workspace = true }
+nix = { workspace = true }
 tokio-uring = { workspace = true }
