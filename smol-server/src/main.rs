@@ -1,39 +1,28 @@
-// Since we can hardly control every thread, we should use `taskset`.
+use std::sync::Arc;
 
 use config::{PACKET_SIZE, ServerConfig};
-use tokio::{
-    io::{AsyncReadExt, AsyncWriteExt},
-    net::TcpListener,
-    runtime::{Builder, Runtime},
-};
+use smol::future;
+use smol::io::{AsyncReadExt, AsyncWriteExt};
+use smol::{Executor, net::TcpListener};
 
 fn main() {
-    let cfg = ServerConfig::parse();
+    let cfg = Arc::new(ServerConfig::parse());
     let cores = cfg.cores.len();
     println!(
-        "Running ping pong server with Tokio.\nPacket size: {}\nListen {}\nCPU count: {}",
+        "Running ping pong server with Smol.\nPacket size: {}\nListen {}\nCPU count: {}",
         PACKET_SIZE, cfg.bind, cores
     );
 
-    let rt = if cores == 1 {
-        Builder::new_current_thread().enable_all().build().unwrap()
-    } else {
-        Builder::new_multi_thread()
-            .enable_all()
-            .worker_threads(cores)
-            .build()
-            .unwrap()
-    };
-
-    rt.block_on(serve(&cfg, &rt))
+    let ex = Arc::new(smol::Executor::new());
+    future::block_on(ex.run(serve(cfg, ex.clone())));
 }
 
-async fn serve(cfg: &ServerConfig, rt: &Runtime) {
+async fn serve(cfg: Arc<ServerConfig>, ex: Arc<Executor<'_>>) {
     let listener = TcpListener::bind(&cfg.bind).await.unwrap();
 
     loop {
         let (mut stream, _) = listener.accept().await.unwrap();
-        rt.spawn(async move {
+        ex.spawn(async move {
             let mut buf = vec![0; PACKET_SIZE];
             loop {
                 match stream.read_exact(&mut buf).await {
@@ -49,6 +38,7 @@ async fn serve(cfg: &ServerConfig, rt: &Runtime) {
                     }
                 }
             }
-        });
+        })
+        .detach();
     }
 }

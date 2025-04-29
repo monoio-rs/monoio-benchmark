@@ -1,19 +1,40 @@
 [workspace]
+resolver = "3"
 
 members = [
     "monoio-server",
     "tokio-server",
     "glommio-server",
-
     "client",
-
-    "config"
+    "config",
+    "tokio-uring-server",
+    "compio-server",
+    "smol-server",
+    "may-server",
+    "nio-server",
 ]
 
 [workspace.dependencies]
 monoio = { git = "https://github.com/bytedance/monoio" }
+tokio-uring = { git = "https://github.com/tokio-rs/tokio-uring" }
+tokio = { git = "https://github.com/tokio-rs/tokio", features = [
+    "rt-multi-thread",
+    "io-util",
+    "net",
+] }
+glommio = { git = "https://github.com/DataDog/glommio" }
+futures-lite = "2.6"
+clap = { version = "4.5", features = ["derive"] }
+local-sync = "0.1"
+compio = { git = "https://github.com/compio-rs/compio" }
+nix = { version = "0.29", features = ["process", "sched"] }
+socket2 = { version = "0.5" }
+smol = { git = "https://github.com/smol-rs/smol" }
+may = { git = "https://github.com/Xudong-Huang/may" }
+nio = { git = "https://github.com/nurmohammed840/nio" }
 
 [profile.release]
-lto = true
-debug = false
-overflow-checks = false
+codegen-units = 1 # Allows LLVM to perform better optimization.
+lto = true        # Enables link-time-optimizations.
+panic = "abort"   # Higher performance by disabling panic handlers.
+strip = true      # Ensures debug symbols are removed.

@@ -1,8 +1,9 @@
 [package]
-name = "tokio-server"
+name = "smol-server"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
 config = { path = "../config" }
-tokio = { workspace = true }
+smol = { workspace = true }
+futures-lite = { workspace = true }

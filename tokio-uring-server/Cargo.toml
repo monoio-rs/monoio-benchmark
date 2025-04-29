@@ -1,0 +1,10 @@
+[package]
+name = "tokio-uring-server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+config = { path = "../config" }
+socket2 = { workspace = true }
+nix = { workspace = true }
+tokio-uring = { workspace = true }
