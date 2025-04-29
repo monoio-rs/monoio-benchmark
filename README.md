@@ -17,8 +17,7 @@ cargo build --release
 ./run_client.sh
 ```
 
-
-
+In the future, I'll also add more clients.
 
 
 # Benchmark
